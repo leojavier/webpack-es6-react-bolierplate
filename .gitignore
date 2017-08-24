@@ -1,5 +1,5 @@
 node_modules
 dist/about.html
 dist/index.html
-dist/js
+dist/*
 build
