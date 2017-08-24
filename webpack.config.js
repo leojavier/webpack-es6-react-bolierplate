@@ -1,8 +1,20 @@
 const path = require('path')
 const config = require('./config')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
+var CopyWebpackPlugin = require('copy-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const webpack = require('webpack')
+
+var isProd = process.env.NODE_ENV === 'production' // true or false
+
+var cssDev = ['style-loader', 'css-loader', 'less-loader']
+var cssProd = ExtractTextPlugin.extract({
+  fallback: 'style-loader',
+  use: ['css-loader', 'less-loader'],
+  publicPath: '/dist'
+})
+
+var cssConfig = isProd ? cssProd : cssDev
 
 module.exports = {
   entry: [
@@ -35,31 +47,24 @@ module.exports = {
       },
       { test: /\.(woff2?|svg)$/, loader: 'url-loader?limit=10000&name=fonts/[name].[ext]' },
       { test: /\.(ttf|eot)$/, loader: 'file-loader?name=fonts/[name].[ext]' },
+      { test: /\.ejs$/, exclude: /node_modules/, loader: 'ejs-loader?variable=data' },
       {
         test: /\.less$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: ['css-loader', 'less-loader'],
-          publicPath: '/dist'
-        })
+        use: cssConfig
       }
     ]
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      title: 'Boiler-plate',
-      minify: {
-        collapseWhitespace: false
-      },
-      hash: false,
-      filename: 'index.html',
-      modules: true,
-      template: 'src/index.html',
-      chunksSortMode: 'none'
-    }),
+    new CopyWebpackPlugin([
+      {
+        from: 'views/index.ejs',
+        to: 'index.html',
+        toType: 'file'
+      }
+    ]),
     new ExtractTextPlugin({
       filename: 'css/[name].css',
-      disable: false
+      disable: true
     }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin()

@@ -3,7 +3,7 @@ class App extends Component {
   render () {
     return (
       <div>
-        HE Page!!!
+        HE Page
       </div>
     )
   }
