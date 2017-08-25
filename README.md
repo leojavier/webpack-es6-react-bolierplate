@@ -2,7 +2,8 @@
 
 ## Dev Environment
 The following command will clean the directory, build the project and run webpack-dev-server with hot reload. 
-There is not routing within this environment. This environment's focus is to provide you with the necesary tools to prototype UIs. So you need to manually load the view you wish to load and its dependencies inside the `Layout.jsx` file.
+There is not routing within this environment. This environment's focus is to provide you with the necesary tools to prototype UIs.
+
 ```
 npm start 
 ```
@@ -13,7 +14,6 @@ This is an Isomorphic application. It is not recommended to use babel-node on pr
 - add a new property in webpack to the `entryProd object` to compile its css `viewName: path.join(__dirname, 'src/css/viewName.less')`
 - Create view `styleFile.less` inside [src/css/viewName.less]
 - Create `viewComponent` inside [src/viewName.jsx]
-**To use the hot reload and `webpack-dev-server` load the pageComponent.jsx in the Layout.jsx with its dependencies and then just run `npm start`**
 - Add the route in the [lib/server.js] and its dependencies for production
 
 ## Staging Environment

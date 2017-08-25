@@ -20,7 +20,7 @@ var entryProd = {
     'react',
     'react-dom'
   ],
-  app: path.join(__dirname, './src/Home'),
+  app: path.join(__dirname, './src/layout'),
   global: path.join(__dirname, 'src/css/global.less'),
   home: path.join(__dirname, 'src/css/home.less'),
   about: path.join(__dirname, 'src/css/about.less')
@@ -69,7 +69,10 @@ module.exports = {
     port: config.port,
     stats: 'errors-only',
     hot: true,
-    open: true
+    open: true,
+    historyApiFallback: {
+      index: 'index.html'
+    }
   },
   module: {
     rules: [
