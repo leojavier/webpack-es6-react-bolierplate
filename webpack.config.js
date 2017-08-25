@@ -54,8 +54,7 @@ var output = isProd ? outputProd : outputDev
 
 if (!isProd) {
   var views = new CopyWebpackPlugin([
-    { from: 'views/index.ejs', to: 'index.html', toType: 'file' },
-    { from: 'views/about.ejs', to: 'about.html', toType: 'file' }
+    { from: 'views/dev-index.ejs', to: 'index.html', toType: 'file' }
   ])
   plugins.splice(0, 1)
   plugins.push(views)

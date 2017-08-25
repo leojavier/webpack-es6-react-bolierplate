@@ -9,11 +9,12 @@
     "clean": "rimraf ./dist/*",
     "start": "npm run clean && NODE_ENV=development webpack -d && webpack-dev-server",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build-node": "babel lib -d build --copy-files"
+    "build-node": "npm run clean && npm run build && babel config -d build/config --copy-files && babel src -d build/src --copy-files && babel lib -d build/lib --copy-files"
   },
   "babel": {
     "presets": [
       "react",
+      "es2015",
       "env"
     ]
   },
